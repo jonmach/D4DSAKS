@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: iload
+spec:
+  template:
+    spec:
+      containers:
+      - name: iload
+        image: <Your ACR>/iload:1.0
+        imagePullPolicy: Always
+        env:
+          - name: RMQ_USER
+            value: ""
+          - name: RMQ_PASS
+            value: ""
+          - name: RMQ_HOST
+            value: ""
+          - name: SQL_HOST
+            value: ""
+          - name: SQL_DB
+            value: ""
+          - name: SQL_USER
+            value: ""
+          - name: SQL_PASS
+            value: ""
+          - name: STG_ACNAME
+            value: ""
+          - name: STG_ACKEY
+            value: ""
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+      restartPolicy: Never

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+      - name: worker
+        image: <Your ACR>/worker:1.0
+        imagePullPolicy: Always
+        env:
+          - name: RMQ_USER
+            value: ""
+          - name: RMQ_PASS
+            value: ""
+          - name: RMQ_HOST
+            value: ""
+          - name: SQL_HOST
+            value: ""
+          - name: SQL_DB
+            value: ""
+          - name: SQL_USER
+            value: ""
+          - name: SQL_PASS
+            value: ""
+          - name: STG_ACNAME
+            value: ""
+          - name: STG_ACKEY
+            value: ""
+          - name: LOGTODB
+            value: "1"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 150m
+            memory: 128Mi
